@@ -138,7 +138,7 @@ async function renderBoard(file, stream) {
 
 if (require.main === module) {
 	const config = require("./configuration.js");
-	const HISTORY_FILE = process.argv[2] || path.join(config.HISTORY_DIR, "board-anonymous.json");
+	const HISTORY_FILE = process.argv[2] || path.join(config.HISTORY_DIR, "board-zellin.json");
 
 	renderBoard(HISTORY_FILE, process.stdout)
 		.catch(console.error.bind(console));

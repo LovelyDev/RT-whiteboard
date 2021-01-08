@@ -17,7 +17,7 @@ var MIN_NODE_VERSION = 8.0;
 if (parseFloat(process.versions.node) < MIN_NODE_VERSION) {
 	console.warn(
 		"!!! You are using node " + process.version +
-		", wbo requires at least " + MIN_NODE_VERSION + " !!!");
+		", cyodi requires at least " + MIN_NODE_VERSION + " !!!");
 }
 
 var io = sockets.start(app);
@@ -69,8 +69,7 @@ const boardTemplate = new templating.BoardTemplate(path.join(config.WEBROOT, 'bo
 const indexTemplate = new templating.Template(path.join(config.WEBROOT, 'index.html'));
 
 function validateBoardName(boardName) {
-	if (/^[\w%\-_~()]*$/.test(boardName)) return boardName;
-	throw new Error("Illegal board name: " + boardName);
+	return boardName;
 }
 
 function handleRequest(request, response) {
@@ -83,7 +82,7 @@ function handleRequest(request, response) {
 			// "boards" refers to the root directory
 			if (parts.length === 1) {
 				// '/boards?board=...' This allows html forms to point to boards
-				var boardName = parsedUrl.query.board || "anonymous";
+				var boardName = parsedUrl.query.board || "zellin";
 				var headers = { Location: 'boards/' + encodeURIComponent(boardName) };
 				response.writeHead(301, headers);
 				response.end();
@@ -108,7 +107,7 @@ function handleRequest(request, response) {
 				if (err) return serveError(request, response)(err);
 				response.writeHead(200, {
 					"Content-Type": "application/json",
-					"Content-Disposition": 'attachment; filename="' + boardName + '.wbo"',
+					"Content-Disposition": 'attachment; filename="' + boardName + '.cyodi"',
 					"Content-Length": data.length,
 				});
 				response.end(data);

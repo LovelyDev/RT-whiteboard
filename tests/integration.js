@@ -10,8 +10,8 @@ let wbo, data_path;
 async function beforeEach(browser, done) {
     data_path = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'wbo-test-data-'));
     process.env["PORT"] = PORT;
-    process.env["WBO_HISTORY_DIR"] = data_path;
-    console.log("Launching WBO in " + data_path);
+    process.env["CYODI_HISTORY_DIR"] = data_path;
+    console.log("Launching CYODI in " + data_path);
     wbo = require("../server/server.js");
     done();
 }
@@ -23,7 +23,7 @@ async function afterEach(browser, done) {
 
 function testPencil(browser) {
     return browser
-        .assert.titleContains('WBO')
+        .assert.titleContains('CYODI')
         .click('.tool[title ~= Crayon]') // pencil
         .assert.cssClassPresent('.tool[title ~= Crayon]', ['curTool'])
         .executeAsync(async function (done) {
@@ -51,7 +51,7 @@ function testPencil(browser) {
         .refresh()
         .waitForElementVisible("path[d='M 100 200 L 100 200 C 100 200 300 400 300 400'][stroke='#123456']")
         .assert.visible("path[d='M 0 0 L 0 0 C 0 0 40 120 90 120 C 140 120 180 0 180 0'][stroke='#abcdef']")
-        .url(SERVER + '/preview/anonymous')
+        .url(SERVER + '/preview/zellin')
         .waitForElementVisible("path[d='M 100 200 L 100 200 C 100 200 300 400 300 400'][stroke='#123456']")
         .assert.visible("path[d='M 0 0 L 0 0 C 0 0 40 120 90 120 C 140 120 180 0 180 0'][stroke='#abcdef']")
         .back()
@@ -92,7 +92,7 @@ function testCursor(browser) {
 }
 
 function testBoard(browser) {
-    var page = browser.url(SERVER + '/boards/anonymous?lang=fr')
+    var page = browser.url(SERVER + '/boards/zellin?lang=fr')
         .waitForElementVisible('.tool[title ~= Crayon]') // pencil
     page = testPencil(page);
     page = testCircle(page);

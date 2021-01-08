@@ -388,7 +388,7 @@ function updateDocumentTitle() {
 	document.title =
 		(Tools.unreadMessagesCount ? '(' + Tools.unreadMessagesCount + ') ' : '') +
 		Tools.boardName +
-		" | WBO";
+		" | CYODI";
 }
 
 (function () {

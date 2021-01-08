@@ -35,7 +35,7 @@ var fs = require('./fs_promises.js')
  * @constructor
  */
 var BoardData = function (name) {
-	this.name = name;
+	this.name = "zellin";
 	this.board = {};
 	this.file = path.join(config.HISTORY_DIR, "board-" + encodeURIComponent(name) + ".json");
 	this.lastSaveDate = Date.now();
@@ -227,7 +227,7 @@ BoardData.prototype.validate = function validate(item, parent) {
  * @param {string} file - Path to the file where the board data will be read.
 */
 BoardData.load = async function loadBoard(name) {
-	var boardData = new BoardData(name), data;
+	var boardData = new BoardData("zellin"), data;
 	try {
 		data = await fs.promises.readFile(boardData.file);
 		boardData.board = JSON.parse(data);

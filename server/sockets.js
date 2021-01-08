@@ -45,7 +45,7 @@ function socketConnection(socket) {
 
 	async function joinBoard(name) {
 		// Default to the public board
-		if (!name) name = "anonymous";
+		if (!name) name = "zellin";
 
 		// Join the board
 		socket.join(name);
@@ -90,7 +90,7 @@ function socketConnection(socket) {
 			lastEmitSecond = currentSecond;
 		}
 
-		var boardName = message.board || "anonymous";
+		var boardName = message.board || "zellin";
 		var data = message.data;
 
 		if (!socket.rooms.has(boardName)) socket.join(boardName);
